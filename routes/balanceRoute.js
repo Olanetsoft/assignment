@@ -5,10 +5,7 @@ const router = express.Router();
 const balanceController = require('../controller/balanceController');
 
 //create the routes for balance endpoints
-router.post('/api/v1/users/login');
-router.post('/api/v1/users/login');
-router.post('/api/v1/users/login');
-
+router.get('/balance', balanceController.getBalance);
 
 
 module.exports = router;

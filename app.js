@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
+
 
 //Requiring all route
 const balanceRoute = require('./routes/balanceRoute');
@@ -17,6 +19,10 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
+
+//using cors to set Access-Control-Allow-Origin
+app.use(cors());
+app.options('*', cors());
 
 
 //registering the route middleware

@@ -23,9 +23,8 @@ exports.getBalance = (req, res, next) => {
     const findExist = existUsers[account_id];
 
     if (!findExist) {
-        return res.status(404).send({
-            balance: 0
-        })
+        const empty = 0;
+        return res.status(404).send(empty)
     };
 
     res.status(200).send({
@@ -34,10 +33,5 @@ exports.getBalance = (req, res, next) => {
 };
 
 exports.reset = (req, res, next) => {
-    // delete file named 'sample.txt'
-    fs.unlink('data.json', function (err) {
-        if (err) throw err;
-        // if no error, file has been deleted successfully
-        console.log('File deleted!');
-    });
+    res.status(200);
 }

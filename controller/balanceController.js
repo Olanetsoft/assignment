@@ -31,4 +31,13 @@ exports.getBalance = (req, res, next) => {
     res.status(200).send({
         balance: findExist.amount
     });
+};
+
+exports.reset = (req, res, next) => {
+    // delete file named 'sample.txt'
+    fs.unlink('data.json', function (err) {
+        if (err) throw err;
+        // if no error, file has been deleted successfully
+        console.log('File deleted!');
+    });
 }

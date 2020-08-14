@@ -24,11 +24,11 @@ exports.eventActivities = (req, res, next) => {
     const { type, destination, amount, origin } = req.body;
 
 
-    //check if the data fields send via post request are missing
-    if (type == null || destination == null || amount == null) {
-        const empty = "0";
-        return res.status(404).send(empty)
-    };
+    // //check if the data fields send via post request are missing
+    // if (type == null || destination == null || amount == null) {
+    //     const empty = "0";
+    //     return res.status(404).send(empty)
+    // };
 
     //get the existing user data
     const existUsers = getUserData()

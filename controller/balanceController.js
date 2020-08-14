@@ -5,7 +5,7 @@ const fs = require('fs');
 
 //get the user data from json file
 const getUserData = () => {
-    const jsonData = fs.readFile('./data/data.json')
+    const jsonData = fs.readFileSync('./data/data.json')
     return JSON.parse(jsonData)
 }
 /* util functions implementation ends */
@@ -32,5 +32,5 @@ exports.getBalance = (req, res, next) => {
 };
 
 exports.reset = (req, res, next) => {
-    res.status(200);
+    return res.status(200);
 }

@@ -5,13 +5,13 @@ const fs = require('fs');
 //read the user data from json file
 const saveData = (data) => {
     const stringifySaveData = JSON.stringify(data)
-    fs.writeFile('./data/data.json', stringifySaveData)
+    fs.writeFileSync('./data/data.json', stringifySaveData)
 }
 
 
 //get the user data from json file
 const getUserData = () => {
-    const jsonData = fs.readFile('./data/data.json')
+    const jsonData = fs.readFileSync('./data/data.json')
     return JSON.parse(jsonData)
 }
 /* util functions implementation ends */

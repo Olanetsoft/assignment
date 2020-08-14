@@ -1,6 +1,11 @@
 const fs = require('fs');
 
 /* util functions implementation */
+// save data into the json file
+const saveData = (data) => {
+    const stringifySaveData = JSON.stringify(data);
+    fs.writeFileSync('./data/data.json', stringifySaveData);
+}
 
 //get the user data from json file
 const getUserData = () => {
@@ -31,6 +36,24 @@ exports.getBalance = (req, res) => {
 };
 
 exports.reset = (req, res) => {
+    // get the existing user data
+    const existUsers = getUserData();
+    const destination = "300";
+    const amount = 0;
+
+    // check if the username exist or not       
+    const findExist = existUsers[destination];
+    if (findExist) {
+        data = {
+            destination,
+            amount
+        }
+        // append the account data
+        existUsers[destination] = data;
+
+        // save the new account data
+        saveData(existUsers);
+    }
     // send response
     res.status(200).send("OK");
 };

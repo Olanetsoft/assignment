@@ -22,7 +22,7 @@ const getUserData = () => {
 exports.eventActivities = (req, res, next) => {
     //get the new data from post request
     const { type, destination, amount, origin } = req.body;
-
+    console.log("body destination " + destination)
     //get the existing user data
     const existUsers = getUserData()
 
@@ -92,16 +92,22 @@ exports.eventActivities = (req, res, next) => {
                 }
             })
         }
-
+        // console.log(existUsers[destination])
+        // console.log(destination)
         if (type === "transfer") {
             const findExistOrigin = existUsers[origin];
-            const findExistDestination = existUsers[destination];
-
+            const findExistDestination = existUsers[destination] || destination;
+            // console.log("origin " + origin)
+            // console.log(findExistDestination)
             if (!findExistOrigin) {
                 const empty = "0";
                 return res.status(404).send(empty)
             };
 
+            findExistDestination.amount += parseFloat(amount);
+
+            //append the account data
+            existUsers[destination] = findExistDestination
             
             findExistOrigin.amount -= parseFloat(amount);
 
@@ -110,12 +116,6 @@ exports.eventActivities = (req, res, next) => {
 
             // //save the new account data for origin
             // saveData(existUsers);
-
-            findExistDestination.amount += parseFloat(amount);
-
-            //append the account data
-            existUsers[destination] = findExistDestination
-
             //save the new account data for destination
             saveData(existUsers);
 

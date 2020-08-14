@@ -71,16 +71,16 @@ exports.eventActivities = (req, res, next) => {
         }
 
         if (type === "withdraw") {
-
+            const findExist = existUsers[origin];
             if (!findExist) {
                 const empty = "0";
                 return res.status(404).send(empty)
             };
 
             findExist.amount -= parseFloat(amount);
-
+            console.log(origin)
             //append the account data
-            existUsers[destination] = findExist
+            existUsers[origin] = findExist
 
             //save the new account data
             saveData(existUsers);

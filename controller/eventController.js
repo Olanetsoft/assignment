@@ -80,7 +80,7 @@ exports.eventActivities = (req, res, next) => {
             findExist.amount -= parseFloat(amount);
 
             //append the account data
-            existUsers[destination] = findExist
+            existUsers[origin] = findExist
 
             //save the new account data
             saveData(existUsers);

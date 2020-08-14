@@ -1,3 +1,3 @@
-# cash-transaction-project
+# EBANX Assignment
 
 ![result](/result/test-result.png)

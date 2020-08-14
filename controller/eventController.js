@@ -23,13 +23,6 @@ exports.eventActivities = (req, res, next) => {
     //get the new data from post request
     const { type, destination, amount, origin } = req.body;
 
-
-    // //check if the data fields send via post request are missing
-    // if (type == null || destination == null || amount == null) {
-    //     const empty = "0";
-    //     return res.status(404).send(empty)
-    // };
-
     //get the existing user data
     const existUsers = getUserData()
 
@@ -79,10 +72,10 @@ exports.eventActivities = (req, res, next) => {
 
         if (type === "withdraw") {
 
-            if (!findExist) {
-                const empty = "0";
-                return res.status(404).send(empty)
-            };
+            // if (!findExist) {
+            //     const empty = "0";
+            //     return res.status(404).send(empty)
+            // };
 
             findExist.amount -= parseFloat(amount);
 
@@ -104,7 +97,7 @@ exports.eventActivities = (req, res, next) => {
             const findExistOrigin = existUsers[origin];
             const findExistDestination = existUsers[destination];
 
-            if (!findExistDestination || !findExistOrigin) {
+            if (!findExistOrigin) {
                 const empty = "0";
                 return res.status(404).send(empty)
             }

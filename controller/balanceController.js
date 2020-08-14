@@ -33,4 +33,4 @@ exports.getBalance = (req, res) => {
 exports.reset = (req, res) => {
     // send response
     res.status(200).send("OK");
-}
+};

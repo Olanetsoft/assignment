@@ -3,15 +3,15 @@ const fs = require('fs');
 /* util functions implementation */
 // save data into the json file
 const saveData = (data) => {
-    const stringifySaveData = JSON.stringify(data)
-    fs.writeFileSync('./data/data.json', stringifySaveData)
+    const stringifySaveData = JSON.stringify(data);
+    fs.writeFileSync('./data/data.json', stringifySaveData);
 }
 
 
 // get the data from json file
 const getUserData = () => {
-    const jsonData = fs.readFileSync('./data/data.json')
-    return JSON.parse(jsonData)
+    const jsonData = fs.readFileSync('./data/data.json');
+    return JSON.parse(jsonData);
 }
 /* util functions implementation ends */
 
@@ -23,7 +23,7 @@ exports.allTransactionActivities = (req, res) => {
     const { type, destination, amount, origin } = req.body;
 
     // get the existing user data
-    const existUsers = getUserData()
+    const existUsers = getUserData();
 
     // check if there is existing account
     if (existUsers) {
@@ -36,7 +36,7 @@ exports.allTransactionActivities = (req, res) => {
                 amount
             }
             // append the account data
-            existUsers[destination] = data
+            existUsers[destination] = data;
 
             // save the new account data
             saveData(existUsers);
@@ -55,7 +55,7 @@ exports.allTransactionActivities = (req, res) => {
             findExist.amount += parseFloat(amount);
 
             //append the account data
-            existUsers[destination] = findExist
+            existUsers[destination] = findExist;
 
             //save the new account data
             saveData(existUsers);
@@ -75,13 +75,13 @@ exports.allTransactionActivities = (req, res) => {
             // check if it exist
             if (!findExist) {
                 const empty = "0";
-                return res.status(404).send(empty)
+                return res.status(404).send(empty);
             };
 
             findExist.amount -= parseFloat(amount);
 
             // append the account data
-            existUsers[origin] = findExist
+            existUsers[origin] = findExist;
 
             // save the new account data
             saveData(existUsers);
@@ -103,7 +103,7 @@ exports.allTransactionActivities = (req, res) => {
             // check if it exist
             if (!findExistOrigin) {
                 const empty = "0";
-                return res.status(404).send(empty)
+                return res.status(404).send(empty);
             };
 
 
@@ -130,16 +130,16 @@ exports.allTransactionActivities = (req, res) => {
                     id: findExistDestination.destination,
                     balance: findExistDestination.amount
                 }
-            })
+            });
         };
 
     } else {
         data = {
             destination,
             amount
-        }
+        };
         // append the account data
-        existUsers[destination] = data
+        existUsers[destination] = data;
 
         //save the new account data
         saveData(existUsers);

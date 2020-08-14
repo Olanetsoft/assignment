@@ -24,7 +24,7 @@ exports.getBalance = (req, res, next) => {
 
     if (!findExist) {
         const empty = "0";
-        res.status(404).send(empty)
+        return res.status(404).send(empty)
     };
 
     const balance = findExist.amount

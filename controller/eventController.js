@@ -118,7 +118,7 @@ exports.eventActivities = async(req, res, next) => {
                 existUsers[destination] = findExistDestination
 
                 //save the new account data for destination
-                await saveData(existUsers);
+                saveData(existUsers);
             } catch (err) {
                 console.log(err)
             }

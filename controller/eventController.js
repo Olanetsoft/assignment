@@ -85,7 +85,7 @@ exports.eventActivities = (req, res, next) => {
             //save the new account data
             saveData(existUsers);
 
-            res.status(201).send({
+            return res.status(201).send({
                 origin: {
                     id: findExist.destination,
                     balance: findExist.amount
@@ -117,7 +117,7 @@ exports.eventActivities = (req, res, next) => {
             //save the new account data for origin
             saveData(existUsers);
 
-            res.status(201).send({
+            return res.status(201).send({
                 destination: {
                     id: findExistDestination.destination,
                     balance: findExistDestination.amount

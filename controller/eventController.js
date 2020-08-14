@@ -26,7 +26,7 @@ exports.eventActivities = (req, res, next) => {
 
     //check if the data fields send via post request are missing
     if (type == null || destination == null || amount == null) {
-        const empty = 0;
+        const empty = "0";
         return res.status(404).send(empty)
     };
 
@@ -80,7 +80,7 @@ exports.eventActivities = (req, res, next) => {
         if (type === "withdraw") {
 
             if (!findExist) {
-                const empty = 0;
+                const empty = "0";
                 return res.status(404).send(empty)
             };
 
@@ -105,7 +105,7 @@ exports.eventActivities = (req, res, next) => {
             const findExistDestination = existUsers[destination];
 
             if (!findExistDestination || !findExistOrigin) {
-                const empty = 0;
+                const empty = "0";
                 return res.status(404).send(empty)
             }
             findExistDestination.amount += parseFloat(amount);

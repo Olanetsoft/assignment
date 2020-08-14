@@ -23,7 +23,7 @@ exports.getBalance = (req, res, next) => {
     const findExist = existUsers[account_id];
 
     if (!findExist) {
-        const empty = 0;
+        const empty = "0";
         res.status(404).send(empty)
     };
 
@@ -32,5 +32,5 @@ exports.getBalance = (req, res, next) => {
 };
 
 exports.reset = (req, res, next) => {
-    return res.status(200);
+    res.status(200);
 }

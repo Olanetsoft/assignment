@@ -1,5 +1,21 @@
-// Require the data model
-const { saveModel, getUserModelModel } = require('../model/data');
+const fs = require('fs');
+
+/* util functions implementation */
+// save data into the json file
+const saveData = (data) => {
+    const stringifySaveData = JSON.stringify(data)
+    fs.writeFileSync('./data/data.json', stringifySaveData)
+}
+
+
+// get the data from json file
+const getUserData = () => {
+    const jsonData = fs.readFileSync('./data/data.json')
+    return JSON.parse(jsonData)
+}
+/* util functions implementation ends */
+
+
 
 
 exports.allTransactionActivities = (req, res) => {
@@ -7,7 +23,7 @@ exports.allTransactionActivities = (req, res) => {
     const { type, destination, amount, origin } = req.body;
 
     // get the existing user data
-    const existUsers = getUserModelModel;
+    const existUsers = getUserData()
 
     // check if there is existing account
     if (existUsers) {
@@ -23,7 +39,7 @@ exports.allTransactionActivities = (req, res) => {
             existUsers[destination] = data
 
             // save the new account data
-            saveModel(existUsers);
+            saveData(existUsers);
 
             // send response
             return res.status(201).send({
@@ -42,7 +58,7 @@ exports.allTransactionActivities = (req, res) => {
             existUsers[destination] = findExist
 
             //save the new account data
-            saveModel(existUsers);
+            saveData(existUsers);
 
             return res.status(201).send({
                 destination: {
@@ -68,7 +84,7 @@ exports.allTransactionActivities = (req, res) => {
             existUsers[origin] = findExist
 
             // save the new account data
-            saveModel(existUsers);
+            saveData(existUsers);
 
             // send response
             return res.status(201).send({
@@ -102,7 +118,7 @@ exports.allTransactionActivities = (req, res) => {
             existUsers[destination] = findExistDestination;
 
             //save the new account data for destination and origin
-            saveModel(existUsers);
+            saveData(existUsers);
 
             //send response 
             return res.status(201).send({
@@ -126,7 +142,7 @@ exports.allTransactionActivities = (req, res) => {
         existUsers[destination] = data
 
         //save the new account data
-        saveModel(existUsers);
+        saveData(existUsers);
 
         //send response
         return res.status(201).send({

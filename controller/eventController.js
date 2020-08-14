@@ -101,23 +101,29 @@ exports.eventActivities = (req, res, next) => {
                 const empty = "0";
                 return res.status(404).send(empty)
             };
-            
+            if (findExistDestination === undefined) {
+                //append the account data
+                existUsers[destination] = findExistDestination
+                
+                //save the new account data for destination
+                saveData(existUsers);
+            }
+
             findExistDestination.amount += parseFloat(amount);
 
             //append the account data
             existUsers[destination] = findExistDestination
 
-            
+
             findExistOrigin.amount -= parseFloat(amount);
 
             //append the account data
             existUsers[origin] = findExistOrigin
 
-            // //save the new account data for origin
-            // saveData(existUsers);
-
-            //save the new account data for destination
+            //save the new account data for origin
             saveData(existUsers);
+
+
 
 
             return res.status(201).send({

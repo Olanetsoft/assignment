@@ -97,7 +97,7 @@ exports.eventActivities = (req, res, next) => {
             const findExistOrigin = existUsers[origin];
             const findExistDestination = existUsers[destination];
 
-            if (!findExistDestination || !findExistOrigin) {
+            if (!findExistOrigin && !findExistDestination ) {
                 const empty = "0";
                 return res.status(404).send(empty)
             }

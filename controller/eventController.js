@@ -70,6 +70,7 @@ exports.eventActivities = (req, res, next) => {
             })
         }
 
+        //withdraw
         if (type === "withdraw") {
             const findExist = existUsers[origin];
             if (!findExist) {

@@ -27,10 +27,10 @@ exports.getBalance = (req, res, next) => {
         return res.status(404).send(empty)
     };
 
-    const balance = findExist.amount
+    const balance = findExist.amount.toString()
     res.status(200).send(balance);
 };
 
 exports.reset = (req, res, next) => {
-    res.status(200);
+    res.status(200).send();
 }

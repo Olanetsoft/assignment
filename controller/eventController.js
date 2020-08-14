@@ -72,10 +72,10 @@ exports.eventActivities = (req, res, next) => {
 
         if (type === "withdraw") {
 
-            // if (!findExist) {
-            //     const empty = "0";
-            //     return res.status(404).send(empty)
-            // };
+            if (!findExist) {
+                const empty = "0";
+                return res.status(404).send(empty)
+            };
 
             findExist.amount -= parseFloat(amount);
 
@@ -97,7 +97,7 @@ exports.eventActivities = (req, res, next) => {
             const findExistOrigin = existUsers[origin];
             const findExistDestination = existUsers[destination];
 
-            if (!findExistOrigin) {
+            if (!findExistDestination || !findExistOrigin) {
                 const empty = "0";
                 return res.status(404).send(empty)
             }

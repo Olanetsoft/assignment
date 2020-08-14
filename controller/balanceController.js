@@ -36,6 +36,7 @@ exports.getBalance = (req, res) => {
 };
 
 exports.reset = (req, res) => {
+
     // get the existing user data
     const existUsers = getUserData();
     const destination = "300";
@@ -48,12 +49,13 @@ exports.reset = (req, res) => {
             destination,
             amount
         }
-        // append the account data
+        // reset the account data
         existUsers[destination] = data;
 
         // save the new account data
         saveData(existUsers);
-    }
+    };
+
     // send response
     res.status(200).send("OK");
 };

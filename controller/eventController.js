@@ -19,7 +19,7 @@ const getUserData = () => {
 
 
 
-exports.eventActivities = (req, res, next) => {
+exports.eventActivities = async(req, res, next) => {
     //get the new data from post request
     const { type, destination, amount, origin } = req.body;
 
@@ -79,7 +79,7 @@ exports.eventActivities = (req, res, next) => {
             };
 
             findExist.amount -= parseFloat(amount);
-            console.log(origin)
+
             //append the account data
             existUsers[origin] = findExist
 
@@ -102,23 +102,27 @@ exports.eventActivities = (req, res, next) => {
                 const empty = "0";
                 return res.status(404).send(empty)
             };
+            try {
 
-            
-            findExistOrigin.amount -= parseFloat(amount);
+                findExistOrigin.amount -= parseFloat(amount);
 
-            //append the account data
-            existUsers[origin] = findExistOrigin
+                //append the account data
+                existUsers[origin] = findExistOrigin
 
-            //save the new account data for origin
-            saveData(existUsers);
-            
-            findExistDestination.amount += parseFloat(amount);
+                //save the new account data for origin
+                await saveData(existUsers);
 
-            //append the account data
-            existUsers[destination] = findExistDestination
+                findExistDestination.amount += parseFloat(amount);
 
-            //save the new account data for destination
-            saveData(existUsers);
+                //append the account data
+                existUsers[destination] = findExistDestination
+
+                //save the new account data for destination
+                await saveData(existUsers);
+            } catch (err) {
+                console.log(err)
+            }
+
 
 
             return res.status(201).send({

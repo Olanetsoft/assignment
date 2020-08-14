@@ -107,17 +107,19 @@ exports.eventActivities = (req, res, next) => {
             findExistDestination.amount += parseFloat(amount);
 
             //append the account data
-            existUsers[destination] = findExistDestination
-            
+            existUsers[destination] = findExistDestination;
+
+            //save the new account data for destination
+            saveData(existUsers);
+
             findExistOrigin.amount -= parseFloat(amount);
 
             //append the account data
             existUsers[origin] = findExistOrigin
 
-            // //save the new account data for origin
-            // saveData(existUsers);
-            //save the new account data for destination
+            //save the new account data for origin
             saveData(existUsers);
+            
 
 
             return res.status(201).send({
